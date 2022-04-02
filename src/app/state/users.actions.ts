@@ -6,7 +6,7 @@ export const addUserToNetwork = createAction(
   props<{ userId: string }>()
 );
 
-export const removeUserToNetwork = createAction(
+export const removeUseFromNetwork = createAction(
   '[Users Network] Remove User from Network',
   props<{ userId: string }>()
 );

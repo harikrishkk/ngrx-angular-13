@@ -7,6 +7,7 @@ import { StoreModule } from '@ngrx/store';
 import { usersReducer } from './state/users.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { networkReducer } from './state/network.reducer';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { environment } from '../environments/environment';
     AppRoutingModule,
     HttpClientModule,
     StoreModule.forRoot({
-      users: usersReducer
+      users: usersReducer,
+      network: networkReducer
     }, {}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],

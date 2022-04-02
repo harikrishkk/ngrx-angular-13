@@ -1,8 +1,19 @@
 <h1>Users</h1>
 <ng-container *ngIf="users$ | async as users">
   <ul>
-    <li *ngFor="let user of users">{{ user.first_name }}</li>
+    <li *ngFor="let user of users">
+      {{ user.first_name }}
+      <button (click)="addUserToNetwork(user.id)">+</button>
+    </li>
   </ul>
 </ng-container>
 <hr />
 <h1>Network</h1>
+<ng-container *ngIf="networks$ | async as networks">
+  <ul>
+    <li *ngFor="let network of networks">
+      {{ network.first_name }}
+      <button (click)="removeUserFromNetwork(network.id)">-</button>
+    </li>
+  </ul>
+</ng-container>
