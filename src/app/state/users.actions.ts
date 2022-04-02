@@ -6,6 +6,10 @@ export const addUserToNetwork = createAction(
   props<{ userId: string }>()
 );
 
+export const holdNewUsers = createAction(
+  '[Users List] Hold new users from adding'
+);
+
 export const removeUseFromNetwork = createAction(
   '[Users Network] Remove User from Network',
   props<{ userId: string }>()
