@@ -13,6 +13,7 @@ import { networkReducer } from './state/network.reducer';
 import { UsersModule } from './users/users.module';
 import { EffectsModule } from '@ngrx/effects';
 import { UsersEffects } from './state/users.effects';
+import { NotificationEffects } from './state/notification.effects';
 
 // console.log all actions
 export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
@@ -37,7 +38,7 @@ export const metaReducers: MetaReducer<any>[] = [debug];
     }, { metaReducers }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     UsersModule,
-    EffectsModule.forRoot([UsersEffects])
+    EffectsModule.forRoot([UsersEffects, NotificationEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]
