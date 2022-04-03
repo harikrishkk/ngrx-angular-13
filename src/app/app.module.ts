@@ -14,6 +14,9 @@ import { UsersModule } from './users/users.module';
 import { EffectsModule } from '@ngrx/effects';
 import { UsersEffects } from './state/users.effects';
 import { NotificationEffects } from './state/notification.effects';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { HomeComponent } from './home/home.component';
+import { UserDetailsComponent } from './user-details/user-details.component';
 
 // console.log all actions
 export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
@@ -27,7 +30,9 @@ export const metaReducers: MetaReducer<any>[] = [debug];
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    UserDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +43,8 @@ export const metaReducers: MetaReducer<any>[] = [debug];
     }, { metaReducers }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     UsersModule,
-    EffectsModule.forRoot([UsersEffects, NotificationEffects])
+    EffectsModule.forRoot([UsersEffects, NotificationEffects]),
+    StoreRouterConnectingModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
