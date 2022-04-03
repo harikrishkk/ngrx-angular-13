@@ -1,3 +1,4 @@
+import { MoviesEffects } from './movies/state/movies.effects';
 import { AppState } from './state/app.state';
 import { inject, InjectionToken, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -17,6 +18,9 @@ import { NotificationEffects } from './state/notification.effects';
 import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { HomeComponent } from './home/home.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
+import { MoviesComponent } from './movies/movies.component';
+import { movieReducer } from './movies/state/movies.reducer';
+import { MoviesModule } from './movies/movies.module';
 
 // console.log all actions
 export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
@@ -32,15 +36,16 @@ export const metaReducers: MetaReducer<any>[] = [debug];
   declarations: [
     AppComponent,
     HomeComponent,
-    UserDetailsComponent
+    UserDetailsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    MoviesModule,
     StoreModule.forRoot({
       network: networkReducer,
-      router: routerReducer
+      router: routerReducer,
     }, { metaReducers }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     UsersModule,

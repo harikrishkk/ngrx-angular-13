@@ -1,0 +1,6 @@
+<p>Movies Loaded</p>
+<ul *ngIf="movies$ | async as movies">
+  <li *ngFor="let movie of movies">
+    <p>{{ movie.title }}</p>
+  </li>
+</ul>
