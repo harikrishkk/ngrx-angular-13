@@ -11,8 +11,8 @@ export class UsersService {
   constructor(private http: HttpClient) { }
 
   getusersFromDB(): Observable<User[]> {
-    return this.http.get('https://reqres.in/api/users').pipe(
-      map((res:any) => res.data)
+    return this.http.get('https://reqres.in/api/users?delay=3').pipe(
+      map((res: any) => res.data)
     );
   }
 }

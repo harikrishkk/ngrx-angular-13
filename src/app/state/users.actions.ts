@@ -6,16 +6,17 @@ export const addUserToNetwork = createAction(
   props<{ userId: string }>()
 );
 
-export const holdNewUsers = createAction(
-  '[Users List] Hold new users from adding'
-);
-
 export const removeUseFromNetwork = createAction(
   '[Users Network] Remove User from Network',
   props<{ userId: string }>()
 );
 
+
+export const getUsersInit = createAction(
+  '[Users API] Get All Users Request Init'
+);
+
 export const getAllUsers = createAction(
   '[Users API] Add All Users from DB',
-  props<{ users: ReadonlyArray<User> }>()
+  props<{ users: Array<User> }>()
 );

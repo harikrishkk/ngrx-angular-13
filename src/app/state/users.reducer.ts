@@ -1,14 +1,42 @@
-import { getAllUsers, holdNewUsers } from './users.actions';
-import { createReducer, on } from '@ngrx/store';
+
+import { getAllUsers, getUsersInit } from './users.actions';
+import { createReducer, createFeature, on } from '@ngrx/store';
 import { User } from '../models/users.model';
 
-export const initialState: ReadonlyArray<User> = [];
+interface AppUsers {
+  users: User[];
+  loaded: boolean;
+  loading: boolean;
+}
 
-export const usersReducer = createReducer(
-  initialState,
-  on(getAllUsers, (_state, { users }) => users),
-  on(holdNewUsers, (state) => state)
-);
+const initialState: AppUsers = {
+  users: [],
+  loaded: false,
+  loading: false
+}
 
+export const usersFeature = createFeature({
+  name: 'users',
+  reducer: createReducer(
+    initialState,
+    on(getUsersInit, (state) => ({
+      ...state,
+      loading: true,
+      loaded: false
+    })),
+    on(getAllUsers, (state, { users }) => ({
+      ...state,
+      loading: false,
+      loaded: true,
+      users: users
+    })),
+  )
+})
 
-
+export const {
+  reducer,
+  selectUsersState, // feature selector
+  selectUsers,
+  selectLoading,
+  selectLoaded
+} = usersFeature

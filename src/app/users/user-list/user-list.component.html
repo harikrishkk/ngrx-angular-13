@@ -1,0 +1,8 @@
+<ng-container *ngIf="users$ | async as users">
+  <ul>
+    <li *ngFor="let user of users">
+      {{ user.first_name }}
+      <button (click)="addUserToNetwork(user.id)">+</button>
+    </li>
+  </ul>
+</ng-container>

@@ -4,11 +4,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ActionReducer, MetaReducer, StoreModule } from '@ngrx/store';
-import { usersReducer } from './state/users.reducer';
+
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { networkReducer } from './state/network.reducer';
-import { holdNewUsers } from './state/users.actions';
+
+import { UsersModule } from './users/users.module';
 
 // console.log all actions
 export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
@@ -29,10 +30,10 @@ export const metaReducers: MetaReducer<any>[] = [debug];
     AppRoutingModule,
     HttpClientModule,
     StoreModule.forRoot({
-      users: usersReducer,
       network: networkReducer
     }, { metaReducers }),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    UsersModule
   ],
   providers: [],
   bootstrap: [AppComponent]
