@@ -1,15 +1,18 @@
-import { NgModule } from '@angular/core';
+import { AppState } from './state/app.state';
+import { inject, InjectionToken, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ActionReducer, MetaReducer, StoreModule } from '@ngrx/store';
+import { ActionReducer, ActionReducerMap, MetaReducer, StoreModule } from '@ngrx/store';
 
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { networkReducer } from './state/network.reducer';
 
 import { UsersModule } from './users/users.module';
+import { EffectsModule } from '@ngrx/effects';
+import { UsersEffects } from './state/users.effects';
 
 // console.log all actions
 export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
@@ -33,7 +36,8 @@ export const metaReducers: MetaReducer<any>[] = [debug];
       network: networkReducer
     }, { metaReducers }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    UsersModule
+    UsersModule,
+    EffectsModule.forRoot([UsersEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

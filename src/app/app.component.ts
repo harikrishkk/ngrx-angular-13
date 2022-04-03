@@ -26,10 +26,5 @@ export class AppComponent {
   }
   ngOnInit() {
     this.store.dispatch(getUsersInit())
-    this.usersService.getusersFromDB().subscribe(
-      data => {
-        this.store.dispatch(getAllUsers({ users: data }))
-      }
-    )
   }
 }
