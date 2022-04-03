@@ -1,20 +1,16 @@
-import { Store } from '@ngrx/store';
-import { Component, OnInit } from '@angular/core';
-import { loadMoviesInit } from './state/movies.actions';
-import { selectMovies } from './state/movies.selectors';
 
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { MoviesStore } from './movies.store';
 
 @Component({
   selector: 'app-movies',
   templateUrl: './movies.component.html',
-  styleUrls: ['./movies.component.css']
+  styleUrls: ['./movies.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MoviesComponent implements OnInit {
-  movies$ = this.store.select(selectMovies);
-  constructor(private store: Store) { }
+export class MoviesComponent {
+  movies$ = this._movieStore.movies$;
 
-  ngOnInit() {
-    this.store.dispatch(loadMoviesInit())
+  constructor(private readonly _movieStore: MoviesStore) {
   }
-
 }

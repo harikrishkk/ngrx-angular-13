@@ -5,6 +5,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MoviesComponent } from './movies.component';
 import { movieReducer } from './state/movies.reducer';
+import { MoviesStore } from './movies.store';
+import { MovieContainerComponent } from './movie-container/movie-container.component';
 
 @NgModule({
   imports: [
@@ -12,7 +14,8 @@ import { movieReducer } from './state/movies.reducer';
     StoreModule.forFeature('movies', movieReducer),
     EffectsModule.forFeature([MoviesEffects])
   ],
-  declarations: [MoviesComponent],
-  exports: [MoviesComponent]
+  declarations: [MoviesComponent, MovieContainerComponent],
+  exports: [MovieContainerComponent],
+  providers: [MoviesStore]
 })
 export class MoviesModule { }
