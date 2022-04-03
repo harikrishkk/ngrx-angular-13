@@ -1,3 +1,7 @@
-<p>
-  user-details works!
-</p>
+User details
+<hr />
+<div *ngIf="user$ | async as user">
+  <p>Name: {{ user.first_name }} {{ user.last_name }}</p>
+  <img [src]="user.avatar" />
+  <p>Email: {{ user.email }}</p>
+</div>

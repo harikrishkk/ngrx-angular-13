@@ -14,7 +14,7 @@ import { UsersModule } from './users/users.module';
 import { EffectsModule } from '@ngrx/effects';
 import { UsersEffects } from './state/users.effects';
 import { NotificationEffects } from './state/notification.effects';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { HomeComponent } from './home/home.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 
@@ -39,7 +39,8 @@ export const metaReducers: MetaReducer<any>[] = [debug];
     AppRoutingModule,
     HttpClientModule,
     StoreModule.forRoot({
-      network: networkReducer
+      network: networkReducer,
+      router: routerReducer
     }, { metaReducers }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     UsersModule,

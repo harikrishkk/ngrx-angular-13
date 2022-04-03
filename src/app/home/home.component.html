@@ -8,6 +8,7 @@
   <ul>
     <li *ngFor="let network of networks">
       {{ network.first_name }}
+      <a [routerLink]="['/details', network.id]"> More details</a>
       <button (click)="removeUserFromNetwork(network.id)">-</button>
     </li>
   </ul>

@@ -1,4 +1,6 @@
+import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
+import { selectUserDetails } from '../state/users.selectors';
 
 @Component({
   selector: 'app-user-details',
@@ -6,10 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-details.component.css']
 })
 export class UserDetailsComponent implements OnInit {
-
-  constructor() { }
+  user$ = this.store.select(selectUserDetails);
+  constructor(private store: Store) { }
 
   ngOnInit() {
+
   }
 
 }
