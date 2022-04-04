@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { ColorsService } from '../colors/colors.service';
 import { getUsersInit, removeUseFromNetwork } from '../state/users.actions';
 import { usersFeature } from '../state/users.reducer';
 import { selectNetworks } from '../state/users.selectors';

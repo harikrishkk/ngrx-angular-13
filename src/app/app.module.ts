@@ -21,6 +21,9 @@ import { UserDetailsComponent } from './user-details/user-details.component';
 import { MoviesComponent } from './movies/movies.component';
 import { movieReducer } from './movies/state/movies.reducer';
 import { MoviesModule } from './movies/movies.module';
+import { DefaultDataServiceConfig, EntityDataModule } from '@ngrx/data';
+import { ColorsComponent } from './colors/colors.component';
+import { entityConfig } from './colors/entity-metadata';
 
 // console.log all actions
 export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
@@ -32,11 +35,16 @@ export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
 
 export const metaReducers: MetaReducer<any>[] = [debug];
 
+const defaultDataServiceConfig: DefaultDataServiceConfig = {
+  root: 'https://api.sampleapis.com/csscolornames/',
+}
+
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     UserDetailsComponent,
+    ColorsComponent
   ],
   imports: [
     BrowserModule,
@@ -50,9 +58,15 @@ export const metaReducers: MetaReducer<any>[] = [debug];
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     UsersModule,
     EffectsModule.forRoot([UsersEffects, NotificationEffects]),
-    StoreRouterConnectingModule.forRoot()
+    StoreRouterConnectingModule.forRoot(),
+    EntityDataModule.forRoot(entityConfig)
   ],
-  providers: [],
+  providers: [
+    {
+      provide: DefaultDataServiceConfig,
+      useValue: defaultDataServiceConfig
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
